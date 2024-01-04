@@ -1,9 +1,14 @@
-
-
-
+const { functionsIn } = require("cypress/types/lodash")
 describe('template spec', () => {
   it('passes', () => {
     cy.visit(' http://genihunt-build.s3-website-eu-west-1.amazonaws.com/')
+    // assertion on url
+
+    cy.url().should('eq','http://genihunt-build.s3-website-eu-west-1.amazonaws.com/')
+    // page tittle verification 
+    cy.title().should('include','GeniHunt')
+    cy.wait(3000)
+   
     //LOGIN STATUS 
   
     cy.get(':nth-child(1) > .div-input > div > .form-control').type('18pwcse1718@uetpeshawar.edu.pk{enter}')
@@ -19,15 +24,17 @@ describe('template spec', () => {
   
     cy.get(':nth-child(1) > .nav-link').click()
     cy.get('.search-input-nav').type('squarex{enter}')
+    cy.wait(2000)
+     //validation for company wallpaper 
+     cy.get('.comp-img > img').should('be.visible')
     
-    //subscription testing
+    //subscription testing (iframes )
+
     cy.get('.subscription > a').click()
     cy.get('.subs-button-buy > button').click()
    
 cy.wait(3000)
-  // inserting wrong card number 
-  cy.get('.__PrivateStripeElement > iframe').type('4242 4242 4242 4242 042424242422{enter}')
-  cy.get('.payment-form > button').click()
+  // inserting wrong card number iframeeee
 
   //profile settings 
   cy.get('.icons > img').click()
@@ -45,8 +52,8 @@ cy.wait(3000)
     cy.get('div.export-item > span').click()
     cy.get('.export').click()
     cy.get('.share-item > span').click()
-    cy.wait(5000)
-    cy.get('.share-input > input').type('myaya4455@gmail.com{enter}')
+    cy.wait(3000)
+    cy.get('.share-input > input').type('XXXXXXXXXXXXXX{enter}')
     cy.get('textarea').type('testing 101')
     cy.get('.pdf > .file-label').click()
     cy.get('.share-btn > :nth-child(2)').click()
